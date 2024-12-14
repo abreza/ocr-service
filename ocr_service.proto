@@ -19,48 +19,32 @@ message DetectedElement {
   BoundingBox bbox = 2;
   Polygon polygon = 3;
   float confidence = 4;
-}
-
-message ImageRequest {
-  bytes image_data = 1;
-  string image_format = 2;
-}
-
-message TextRecognitionResponse { repeated DetectedElement text_lines = 1; }
-
-message TextLineDetectionResponse {
-  repeated DetectedElement text_lines = 1;
-  repeated DetectedElement vertical_lines = 2;
+  int32 reading_order = 5;
 }
 
 message LayoutElement {
   enum ElementType {
-    HEADER = 0;
-    FOOTER = 1;
-    TABLE = 2;
-    IMAGE = 3;
-    CAPTION = 4;
-    FOOTNOTE = 5;
-    FORMULA = 6;
-    LIST = 7;
-    SECTION_HEADER = 8;
-    FORM = 9;
-    TOC = 10;
-    HANDWRITING = 11;
-    INLINE_MATH = 12;
+    BLANK = 0;
+    TEXT = 1;
+    TEXT_INLINE_MATH = 2;
+    CODE = 3;
+    SECTION_HEADER = 4;
+    CAPTION = 5;
+    FOOTNOTE = 6;
+    EQUATION = 7;
+    LIST_ITEM = 8;
+    PAGE_FOOTER = 9;
+    PAGE_HEADER = 10;
+    PICTURE = 11;
+    FIGURE = 12;
+    TABLE = 13;
+    FORM = 14;
+    TABLE_OF_CONTENTS = 15;
+    HANDWRITING = 16;
   }
   ElementType type = 1;
   DetectedElement element = 2;
 }
-
-message LayoutAnalysisResponse { repeated LayoutElement elements = 1; }
-
-message TextBlock {
-  DetectedElement element = 1;
-  int32 position = 2;
-}
-
-message ReadingOrderResponse { repeated TextBlock blocks = 1; }
 
 message TableCell {
   DetectedElement content = 1;
@@ -77,24 +61,19 @@ message Table {
   BoundingBox bbox = 4;
 }
 
-message TableRecognitionResponse { repeated Table tables = 1; }
-
-service TextRecognition {
-  rpc RecognizeText(ImageRequest) returns (TextRecognitionResponse) {}
+message ImageRequest {
+  bytes image_data = 1;
+  string image_format = 2;
 }
 
-service TextLineDetection {
-  rpc DetectTextLines(ImageRequest) returns (TextLineDetectionResponse) {}
+message DocumentAnalysisResponse {
+  repeated DetectedElement text_lines = 1;
+  repeated DetectedElement vertical_lines = 2;
+  repeated LayoutElement layout_elements = 3;
+  repeated Table tables = 4;
+  repeated DetectedElement reading_order = 5;
 }
 
-service LayoutAnalysis {
-  rpc AnalyzeLayout(ImageRequest) returns (LayoutAnalysisResponse) {}
-}
-
-service ReadingOrderDetection {
-  rpc DetectReadingOrder(ImageRequest) returns (ReadingOrderResponse) {}
-}
-
-service TableRecognition {
-  rpc RecognizeTables(ImageRequest) returns (TableRecognitionResponse) {}
+service DocumentAnalysis {
+  rpc AnalyzeDocument(ImageRequest) returns (DocumentAnalysisResponse) {}
 }

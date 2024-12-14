@@ -25,7 +25,7 @@ if _version_not_supported:
     )
 
 
-class TextRecognitionStub(object):
+class DocumentAnalysisStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -34,43 +34,43 @@ class TextRecognitionStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.RecognizeText = channel.unary_unary(
-                '/ocr.TextRecognition/RecognizeText',
+        self.AnalyzeDocument = channel.unary_unary(
+                '/ocr.DocumentAnalysis/AnalyzeDocument',
                 request_serializer=ocr__service__pb2.ImageRequest.SerializeToString,
-                response_deserializer=ocr__service__pb2.TextRecognitionResponse.FromString,
+                response_deserializer=ocr__service__pb2.DocumentAnalysisResponse.FromString,
                 _registered_method=True)
 
 
-class TextRecognitionServicer(object):
+class DocumentAnalysisServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def RecognizeText(self, request, context):
+    def AnalyzeDocument(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_TextRecognitionServicer_to_server(servicer, server):
+def add_DocumentAnalysisServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'RecognizeText': grpc.unary_unary_rpc_method_handler(
-                    servicer.RecognizeText,
+            'AnalyzeDocument': grpc.unary_unary_rpc_method_handler(
+                    servicer.AnalyzeDocument,
                     request_deserializer=ocr__service__pb2.ImageRequest.FromString,
-                    response_serializer=ocr__service__pb2.TextRecognitionResponse.SerializeToString,
+                    response_serializer=ocr__service__pb2.DocumentAnalysisResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ocr.TextRecognition', rpc_method_handlers)
+            'ocr.DocumentAnalysis', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('ocr.TextRecognition', rpc_method_handlers)
+    server.add_registered_method_handlers('ocr.DocumentAnalysis', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class TextRecognition(object):
+class DocumentAnalysis(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def RecognizeText(request,
+    def AnalyzeDocument(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,297 +83,9 @@ class TextRecognition(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ocr.TextRecognition/RecognizeText',
+            '/ocr.DocumentAnalysis/AnalyzeDocument',
             ocr__service__pb2.ImageRequest.SerializeToString,
-            ocr__service__pb2.TextRecognitionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-
-class TextLineDetectionStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.DetectTextLines = channel.unary_unary(
-                '/ocr.TextLineDetection/DetectTextLines',
-                request_serializer=ocr__service__pb2.ImageRequest.SerializeToString,
-                response_deserializer=ocr__service__pb2.TextLineDetectionResponse.FromString,
-                _registered_method=True)
-
-
-class TextLineDetectionServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def DetectTextLines(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_TextLineDetectionServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'DetectTextLines': grpc.unary_unary_rpc_method_handler(
-                    servicer.DetectTextLines,
-                    request_deserializer=ocr__service__pb2.ImageRequest.FromString,
-                    response_serializer=ocr__service__pb2.TextLineDetectionResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'ocr.TextLineDetection', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('ocr.TextLineDetection', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class TextLineDetection(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def DetectTextLines(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ocr.TextLineDetection/DetectTextLines',
-            ocr__service__pb2.ImageRequest.SerializeToString,
-            ocr__service__pb2.TextLineDetectionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-
-class LayoutAnalysisStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.AnalyzeLayout = channel.unary_unary(
-                '/ocr.LayoutAnalysis/AnalyzeLayout',
-                request_serializer=ocr__service__pb2.ImageRequest.SerializeToString,
-                response_deserializer=ocr__service__pb2.LayoutAnalysisResponse.FromString,
-                _registered_method=True)
-
-
-class LayoutAnalysisServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def AnalyzeLayout(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_LayoutAnalysisServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'AnalyzeLayout': grpc.unary_unary_rpc_method_handler(
-                    servicer.AnalyzeLayout,
-                    request_deserializer=ocr__service__pb2.ImageRequest.FromString,
-                    response_serializer=ocr__service__pb2.LayoutAnalysisResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'ocr.LayoutAnalysis', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('ocr.LayoutAnalysis', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class LayoutAnalysis(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def AnalyzeLayout(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ocr.LayoutAnalysis/AnalyzeLayout',
-            ocr__service__pb2.ImageRequest.SerializeToString,
-            ocr__service__pb2.LayoutAnalysisResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-
-class ReadingOrderDetectionStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.DetectReadingOrder = channel.unary_unary(
-                '/ocr.ReadingOrderDetection/DetectReadingOrder',
-                request_serializer=ocr__service__pb2.ImageRequest.SerializeToString,
-                response_deserializer=ocr__service__pb2.ReadingOrderResponse.FromString,
-                _registered_method=True)
-
-
-class ReadingOrderDetectionServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def DetectReadingOrder(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_ReadingOrderDetectionServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'DetectReadingOrder': grpc.unary_unary_rpc_method_handler(
-                    servicer.DetectReadingOrder,
-                    request_deserializer=ocr__service__pb2.ImageRequest.FromString,
-                    response_serializer=ocr__service__pb2.ReadingOrderResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'ocr.ReadingOrderDetection', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('ocr.ReadingOrderDetection', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class ReadingOrderDetection(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def DetectReadingOrder(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ocr.ReadingOrderDetection/DetectReadingOrder',
-            ocr__service__pb2.ImageRequest.SerializeToString,
-            ocr__service__pb2.ReadingOrderResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-
-class TableRecognitionStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.RecognizeTables = channel.unary_unary(
-                '/ocr.TableRecognition/RecognizeTables',
-                request_serializer=ocr__service__pb2.ImageRequest.SerializeToString,
-                response_deserializer=ocr__service__pb2.TableRecognitionResponse.FromString,
-                _registered_method=True)
-
-
-class TableRecognitionServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def RecognizeTables(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_TableRecognitionServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'RecognizeTables': grpc.unary_unary_rpc_method_handler(
-                    servicer.RecognizeTables,
-                    request_deserializer=ocr__service__pb2.ImageRequest.FromString,
-                    response_serializer=ocr__service__pb2.TableRecognitionResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'ocr.TableRecognition', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('ocr.TableRecognition', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class TableRecognition(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def RecognizeTables(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ocr.TableRecognition/RecognizeTables',
-            ocr__service__pb2.ImageRequest.SerializeToString,
-            ocr__service__pb2.TableRecognitionResponse.FromString,
+            ocr__service__pb2.DocumentAnalysisResponse.FromString,
             options,
             channel_credentials,
             insecure,

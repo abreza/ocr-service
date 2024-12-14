@@ -1,4 +1,4 @@
 grpcio==1.67.0
 grpcio-tools==1.67.0
-surya-ocr==0.7.0
+surya-ocr==0.8.0
 torch==2.5.1
