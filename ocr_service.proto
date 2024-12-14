@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package ocr;
+
+message BoundingBox {
+  float x1 = 1;
+  float y1 = 2;
+  float x2 = 3;
+  float y2 = 4;
+}
+
+message Polygon {
+  repeated float x = 1;
+  repeated float y = 2;
+}
+
+message DetectedElement {
+  string content = 1;
+  BoundingBox bbox = 2;
+  Polygon polygon = 3;
+  float confidence = 4;
+}
+
+message ImageRequest {
+  bytes image_data = 1;
+  string image_format = 2;
+}
+
+message TextRecognitionResponse { repeated DetectedElement text_lines = 1; }
+
+message TextLineDetectionResponse {
+  repeated DetectedElement text_lines = 1;
+  repeated DetectedElement vertical_lines = 2;
+}
+
+message LayoutElement {
+  enum ElementType {
+    HEADER = 0;
+    FOOTER = 1;
+    TABLE = 2;
+    IMAGE = 3;
+    CAPTION = 4;
+    FOOTNOTE = 5;
+    FORMULA = 6;
+    LIST = 7;
+    SECTION_HEADER = 8;
+    FORM = 9;
+    TOC = 10;
+    HANDWRITING = 11;
+    INLINE_MATH = 12;
+  }
+  ElementType type = 1;
+  DetectedElement element = 2;
+}
+
+message LayoutAnalysisResponse { repeated LayoutElement elements = 1; }
+
+message TextBlock {
+  DetectedElement element = 1;
+  int32 position = 2;
+}
+
+message ReadingOrderResponse { repeated TextBlock blocks = 1; }
+
+message TableCell {
+  DetectedElement content = 1;
+  int32 row_id = 2;
+  int32 col_id = 3;
+  int32 row_span = 4;
+  int32 col_span = 5;
+}
+
+message Table {
+  repeated TableCell cells = 1;
+  int32 num_rows = 2;
+  int32 num_cols = 3;
+  BoundingBox bbox = 4;
+}
+
+message TableRecognitionResponse { repeated Table tables = 1; }
+
+service TextRecognition {
+  rpc RecognizeText(ImageRequest) returns (TextRecognitionResponse) {}
+}
+
+service TextLineDetection {
+  rpc DetectTextLines(ImageRequest) returns (TextLineDetectionResponse) {}
+}
+
+service LayoutAnalysis {
+  rpc AnalyzeLayout(ImageRequest) returns (LayoutAnalysisResponse) {}
+}
+
+service ReadingOrderDetection {
+  rpc DetectReadingOrder(ImageRequest) returns (ReadingOrderResponse) {}
+}
+
+service TableRecognition {
+  rpc RecognizeTables(ImageRequest) returns (TableRecognitionResponse) {}
+}

@@ -1,0 +1,7 @@
+services:
+  ocr-service:
+    build: .
+    ports:
+      - "50052:50051"
+    environment:
+      - PYTHONUNBUFFERED=1
