@@ -1,5 +1,5 @@
 import io
-from typing import List, Union, Optional
+from typing import List
 from PIL import Image
 import ocr_service_pb2 as pb2
 
@@ -9,47 +9,38 @@ def load_image(request) -> Image.Image:
     return Image.open(image_bytes)
 
 def create_detected_element(
-    bbox: Union[List[float], object],
-    polygon: Optional[Union[List[float], object]] = None,
-    content: str = "",
+    bbox: List[float],
     confidence: float = 1.0,
     reading_order: int = 0
 ) -> pb2.DetectedElement:
     """Create a DetectedElement from detection results."""
     element = pb2.DetectedElement()
-    element.content = content
 
-    # Handle bbox that might be an object with bbox attribute
-    if hasattr(bbox, 'bbox'):
-        bbox = bbox.bbox
+    if not bbox:
+        raise ValueError("Bbox cannot be None or empty")
 
     if isinstance(bbox[0], (list, tuple)):
         bbox = [coord for sublist in bbox for coord in sublist][:4]
 
-    if len(bbox) >= 4:
-        element.bbox.x1 = float(bbox[0])
-        element.bbox.y1 = float(bbox[1])
-        element.bbox.x2 = float(bbox[2])
-        element.bbox.y2 = float(bbox[3])
-    else:
+    if len(bbox) < 4:
         raise ValueError(f"Invalid bbox format: {bbox}")
 
-    if polygon is not None:
-        # Handle polygon that might be an object with polygon attribute
-        if hasattr(polygon, 'polygon'):
-            polygon = polygon.polygon
+    # Ensure all bbox coordinates are valid numbers
+    try:
+        element.bbox.x1 = float(bbox[0] or 0)
+        element.bbox.y1 = float(bbox[1] or 0)
+        element.bbox.x2 = float(bbox[2] or 0)
+        element.bbox.y2 = float(bbox[3] or 0)
+    except (TypeError, ValueError) as e:
+        raise ValueError(f"Invalid bbox coordinate values: {bbox}. Error: {str(e)}")
 
-        if isinstance(polygon[0], (list, tuple)):
-            polygon = [coord for sublist in polygon for coord in sublist]
+    # Ensure confidence is a valid float
+    try:
+        element.confidence = float(confidence if confidence is not None else 1.0)
+    except (TypeError, ValueError):
+        element.confidence = 1.0
 
-        if len(polygon) % 2 == 0:
-            element.polygon.x.extend([float(x) for x in polygon[::2]])
-            element.polygon.y.extend([float(y) for y in polygon[1::2]])
-        else:
-            raise ValueError(f"Invalid polygon format: {polygon}")
-
-    element.confidence = float(confidence)
-    element.reading_order = reading_order
+    element.reading_order = int(reading_order if reading_order is not None else 0)
     return element
 
 # Map Surya labels to proto enum types

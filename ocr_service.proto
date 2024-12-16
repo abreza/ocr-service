@@ -9,17 +9,10 @@ message BoundingBox {
   float y2 = 4;
 }
 
-message Polygon {
-  repeated float x = 1;
-  repeated float y = 2;
-}
-
 message DetectedElement {
-  string content = 1;
-  BoundingBox bbox = 2;
-  Polygon polygon = 3;
-  float confidence = 4;
-  int32 reading_order = 5;
+  BoundingBox bbox = 1;
+  float confidence = 2;
+  int32 reading_order = 3;
 }
 
 message LayoutElement {
@@ -46,32 +39,14 @@ message LayoutElement {
   DetectedElement element = 2;
 }
 
-message TableCell {
-  DetectedElement content = 1;
-  int32 row_id = 2;
-  int32 col_id = 3;
-  int32 row_span = 4;
-  int32 col_span = 5;
-}
-
-message Table {
-  repeated TableCell cells = 1;
-  int32 num_rows = 2;
-  int32 num_cols = 3;
-  BoundingBox bbox = 4;
-}
-
 message ImageRequest {
   bytes image_data = 1;
   string image_format = 2;
 }
 
 message DocumentAnalysisResponse {
-  repeated DetectedElement text_lines = 1;
-  repeated DetectedElement vertical_lines = 2;
-  repeated LayoutElement layout_elements = 3;
-  repeated Table tables = 4;
-  repeated DetectedElement reading_order = 5;
+  repeated LayoutElement layout_elements = 1;
+  repeated DetectedElement reading_order = 2;
 }
 
 service DocumentAnalysis {

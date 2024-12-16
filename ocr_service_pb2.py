@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11ocr_service.proto\x12\x03ocr\"=\n\x0b\x42oundingBox\x12\n\n\x02x1\x18\x01 \x01(\x02\x12\n\n\x02y1\x18\x02 \x01(\x02\x12\n\n\x02x2\x18\x03 \x01(\x02\x12\n\n\x02y2\x18\x04 \x01(\x02\"\x1f\n\x07Polygon\x12\t\n\x01x\x18\x01 \x03(\x02\x12\t\n\x01y\x18\x02 \x03(\x02\"\x8c\x01\n\x0f\x44\x65tectedElement\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\x12\x1e\n\x04\x62\x62ox\x18\x02 \x01(\x0b\x32\x10.ocr.BoundingBox\x12\x1d\n\x07polygon\x18\x03 \x01(\x0b\x32\x0c.ocr.Polygon\x12\x12\n\nconfidence\x18\x04 \x01(\x02\x12\x15\n\rreading_order\x18\x05 \x01(\x05\"\xed\x02\n\rLayoutElement\x12,\n\x04type\x18\x01 \x01(\x0e\x32\x1e.ocr.LayoutElement.ElementType\x12%\n\x07\x65lement\x18\x02 \x01(\x0b\x32\x14.ocr.DetectedElement\"\x86\x02\n\x0b\x45lementType\x12\t\n\x05\x42LANK\x10\x00\x12\x08\n\x04TEXT\x10\x01\x12\x14\n\x10TEXT_INLINE_MATH\x10\x02\x12\x08\n\x04\x43ODE\x10\x03\x12\x12\n\x0eSECTION_HEADER\x10\x04\x12\x0b\n\x07\x43\x41PTION\x10\x05\x12\x0c\n\x08\x46OOTNOTE\x10\x06\x12\x0c\n\x08\x45QUATION\x10\x07\x12\r\n\tLIST_ITEM\x10\x08\x12\x0f\n\x0bPAGE_FOOTER\x10\t\x12\x0f\n\x0bPAGE_HEADER\x10\n\x12\x0b\n\x07PICTURE\x10\x0b\x12\n\n\x06\x46IGURE\x10\x0c\x12\t\n\x05TABLE\x10\r\x12\x08\n\x04\x46ORM\x10\x0e\x12\x15\n\x11TABLE_OF_CONTENTS\x10\x0f\x12\x0f\n\x0bHANDWRITING\x10\x10\"v\n\tTableCell\x12%\n\x07\x63ontent\x18\x01 \x01(\x0b\x32\x14.ocr.DetectedElement\x12\x0e\n\x06row_id\x18\x02 \x01(\x05\x12\x0e\n\x06\x63ol_id\x18\x03 \x01(\x05\x12\x10\n\x08row_span\x18\x04 \x01(\x05\x12\x10\n\x08\x63ol_span\x18\x05 \x01(\x05\"j\n\x05Table\x12\x1d\n\x05\x63\x65lls\x18\x01 \x03(\x0b\x32\x0e.ocr.TableCell\x12\x10\n\x08num_rows\x18\x02 \x01(\x05\x12\x10\n\x08num_cols\x18\x03 \x01(\x05\x12\x1e\n\x04\x62\x62ox\x18\x04 \x01(\x0b\x32\x10.ocr.BoundingBox\"8\n\x0cImageRequest\x12\x12\n\nimage_data\x18\x01 \x01(\x0c\x12\x14\n\x0cimage_format\x18\x02 \x01(\t\"\xe8\x01\n\x18\x44ocumentAnalysisResponse\x12(\n\ntext_lines\x18\x01 \x03(\x0b\x32\x14.ocr.DetectedElement\x12,\n\x0evertical_lines\x18\x02 \x03(\x0b\x32\x14.ocr.DetectedElement\x12+\n\x0flayout_elements\x18\x03 \x03(\x0b\x32\x12.ocr.LayoutElement\x12\x1a\n\x06tables\x18\x04 \x03(\x0b\x32\n.ocr.Table\x12+\n\rreading_order\x18\x05 \x03(\x0b\x32\x14.ocr.DetectedElement2Y\n\x10\x44ocumentAnalysis\x12\x45\n\x0f\x41nalyzeDocument\x12\x11.ocr.ImageRequest\x1a\x1d.ocr.DocumentAnalysisResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11ocr_service.proto\x12\x03ocr\"=\n\x0b\x42oundingBox\x12\n\n\x02x1\x18\x01 \x01(\x02\x12\n\n\x02y1\x18\x02 \x01(\x02\x12\n\n\x02x2\x18\x03 \x01(\x02\x12\n\n\x02y2\x18\x04 \x01(\x02\"\\\n\x0f\x44\x65tectedElement\x12\x1e\n\x04\x62\x62ox\x18\x01 \x01(\x0b\x32\x10.ocr.BoundingBox\x12\x12\n\nconfidence\x18\x02 \x01(\x02\x12\x15\n\rreading_order\x18\x03 \x01(\x05\"\xed\x02\n\rLayoutElement\x12,\n\x04type\x18\x01 \x01(\x0e\x32\x1e.ocr.LayoutElement.ElementType\x12%\n\x07\x65lement\x18\x02 \x01(\x0b\x32\x14.ocr.DetectedElement\"\x86\x02\n\x0b\x45lementType\x12\t\n\x05\x42LANK\x10\x00\x12\x08\n\x04TEXT\x10\x01\x12\x14\n\x10TEXT_INLINE_MATH\x10\x02\x12\x08\n\x04\x43ODE\x10\x03\x12\x12\n\x0eSECTION_HEADER\x10\x04\x12\x0b\n\x07\x43\x41PTION\x10\x05\x12\x0c\n\x08\x46OOTNOTE\x10\x06\x12\x0c\n\x08\x45QUATION\x10\x07\x12\r\n\tLIST_ITEM\x10\x08\x12\x0f\n\x0bPAGE_FOOTER\x10\t\x12\x0f\n\x0bPAGE_HEADER\x10\n\x12\x0b\n\x07PICTURE\x10\x0b\x12\n\n\x06\x46IGURE\x10\x0c\x12\t\n\x05TABLE\x10\r\x12\x08\n\x04\x46ORM\x10\x0e\x12\x15\n\x11TABLE_OF_CONTENTS\x10\x0f\x12\x0f\n\x0bHANDWRITING\x10\x10\"8\n\x0cImageRequest\x12\x12\n\nimage_data\x18\x01 \x01(\x0c\x12\x14\n\x0cimage_format\x18\x02 \x01(\t\"t\n\x18\x44ocumentAnalysisResponse\x12+\n\x0flayout_elements\x18\x01 \x03(\x0b\x32\x12.ocr.LayoutElement\x12+\n\rreading_order\x18\x02 \x03(\x0b\x32\x14.ocr.DetectedElement2Y\n\x10\x44ocumentAnalysis\x12\x45\n\x0f\x41nalyzeDocument\x12\x11.ocr.ImageRequest\x1a\x1d.ocr.DocumentAnalysisResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,22 +33,16 @@ if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_BOUNDINGBOX']._serialized_start=26
   _globals['_BOUNDINGBOX']._serialized_end=87
-  _globals['_POLYGON']._serialized_start=89
-  _globals['_POLYGON']._serialized_end=120
-  _globals['_DETECTEDELEMENT']._serialized_start=123
-  _globals['_DETECTEDELEMENT']._serialized_end=263
-  _globals['_LAYOUTELEMENT']._serialized_start=266
-  _globals['_LAYOUTELEMENT']._serialized_end=631
-  _globals['_LAYOUTELEMENT_ELEMENTTYPE']._serialized_start=369
-  _globals['_LAYOUTELEMENT_ELEMENTTYPE']._serialized_end=631
-  _globals['_TABLECELL']._serialized_start=633
-  _globals['_TABLECELL']._serialized_end=751
-  _globals['_TABLE']._serialized_start=753
-  _globals['_TABLE']._serialized_end=859
-  _globals['_IMAGEREQUEST']._serialized_start=861
-  _globals['_IMAGEREQUEST']._serialized_end=917
-  _globals['_DOCUMENTANALYSISRESPONSE']._serialized_start=920
-  _globals['_DOCUMENTANALYSISRESPONSE']._serialized_end=1152
-  _globals['_DOCUMENTANALYSIS']._serialized_start=1154
-  _globals['_DOCUMENTANALYSIS']._serialized_end=1243
+  _globals['_DETECTEDELEMENT']._serialized_start=89
+  _globals['_DETECTEDELEMENT']._serialized_end=181
+  _globals['_LAYOUTELEMENT']._serialized_start=184
+  _globals['_LAYOUTELEMENT']._serialized_end=549
+  _globals['_LAYOUTELEMENT_ELEMENTTYPE']._serialized_start=287
+  _globals['_LAYOUTELEMENT_ELEMENTTYPE']._serialized_end=549
+  _globals['_IMAGEREQUEST']._serialized_start=551
+  _globals['_IMAGEREQUEST']._serialized_end=607
+  _globals['_DOCUMENTANALYSISRESPONSE']._serialized_start=609
+  _globals['_DOCUMENTANALYSISRESPONSE']._serialized_end=725
+  _globals['_DOCUMENTANALYSIS']._serialized_start=727
+  _globals['_DOCUMENTANALYSIS']._serialized_end=816
 # @@protoc_insertion_point(module_scope)
