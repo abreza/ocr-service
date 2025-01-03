@@ -1,7 +1,9 @@
 services:
   ocr-service:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "50052:50051"
-    environment:
-      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./huggingface:/root/.cache/huggingface
