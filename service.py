@@ -2,6 +2,7 @@ import grpc
 import logging
 from typing import List, Tuple
 import PIL.Image
+import gc
 
 from surya.layout import batch_layout_detection
 from surya.model.layout.model import load_model as load_layout_model
@@ -16,12 +17,23 @@ logger = logging.getLogger(__name__)
 
 
 class DocumentAnalysisServicer(pb2_grpc.DocumentAnalysisServicer):
-    # def __init__(self):
-    #     self.layout_model = load_layout_model()
-    #     self.layout_processor = load_layout_processor()
+    def __init__(self):
+        self.layout_model = load_layout_model()
+        self.layout_processor = load_layout_processor()
+
+    def _cleanup_resources(self, image=None, predictions=None):
+        try:
+            if image is not None:
+                image.close()
+                del image
+            if predictions is not None:
+                del predictions
+            gc.collect()
+            logger.debug("Resource cleanup completed successfully")
+        except Exception as e:
+            logger.error(f"Error during resource cleanup: {str(e)}")
 
     def _process_layout_elements(self, layout_predictions) -> Tuple[List[pb2.LayoutElement], List[pb2.DetectedElement]]:
-        """Process layout predictions and create layout elements with reading order."""
         layout_elements = []
         reading_order = []
 
@@ -62,8 +74,10 @@ class DocumentAnalysisServicer(pb2_grpc.DocumentAnalysisServicer):
         return layout_elements, reading_order
 
     def AnalyzeDocument(self, request, context):
-        try:
+        image = None
+        layout_predictions = None
 
+        try:
             logger.debug(
                 f"Received image data of size: {len(request.image_data)} bytes")
 
@@ -89,8 +103,8 @@ class DocumentAnalysisServicer(pb2_grpc.DocumentAnalysisServicer):
 
             layout_predictions = batch_layout_detection(
                 [image],
-                load_layout_model(),
-                load_layout_processor()
+                self.layout_model,
+                self.layout_processor
             )[0]
 
             layout_elements, reading_order = self._process_layout_elements(
@@ -105,3 +119,6 @@ class DocumentAnalysisServicer(pb2_grpc.DocumentAnalysisServicer):
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(f'Error analyzing document: {str(e)}')
             raise
+
+        finally:
+            self._cleanup_resources(image, layout_predictions)
